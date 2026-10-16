@@ -71,3 +71,24 @@ sequenceDiagram
 
     Note right of browser: Le navigateur exécute le callback qui affiche les notes
 ```
+## Exercice 0.6
+
+```mermaid
+sequenceDiagram
+    participant browser
+    participant server
+
+    Note right of browser: L'utilisateur écrit une note et clique sur Save
+
+    Note right of browser: Le JavaScript annule l'envoi classique du formulaire (preventDefault)
+    Note right of browser: Le JavaScript crée la note, l'ajoute à la liste et redessine les notes sur la page
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    Note right of browser: La note est envoyée en JSON (Content-Type: application/json)
+    activate server
+    Note left of server: Le serveur enregistre la note
+    server-->>browser: 201 Created
+    deactivate server
+
+    Note right of browser: La page n'est pas rechargée, aucune autre requête n'est envoyée
+```
